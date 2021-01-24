@@ -1,0 +1,11 @@
+@import 'font';
+
+.pokemon-name {
+    // background: -moz-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255, 1)) !important;
+    // background: rgb(241,196,15);
+    // background: linear-gradient(0deg, rgba(71, 74, 202, 0.4) 0%, rgba(0,0,0,0) 100%);
+    text-transform: capitalize;
+    color: #2C71B8;
+    font-family: 'Pokemon';
+    font-size: 28px !important;
+}

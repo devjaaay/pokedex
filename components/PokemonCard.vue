@@ -25,7 +25,9 @@
           <span class="text-capitalize">{{ item.type.name }}</span>
         </v-tooltip>
       </div>
-      <v-card-title>{{ pokemon.name }}</v-card-title>
+      <v-card-title class="pokemon-name">
+        {{ pokemon.name }}
+      </v-card-title>
     </v-img>
     <v-avatar size="120px" class="pokemon--avatar" tile>
       <img
@@ -43,6 +45,7 @@
         outlined
         rounded
         small
+        @click="$router.push(`/${pokemon.id}`)"
       >
         Learn More
       </v-btn>
@@ -121,16 +124,6 @@ export default {
     height: 200px;
     width: 400px;
     position: relative;
-}
-
-::v-deep .v-card__title {
-    // background: -moz-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255, 1)) !important;
-    // background: rgb(241,196,15);
-    // background: linear-gradient(0deg, rgba(71, 74, 202, 0.4) 0%, rgba(0,0,0,0) 100%);
-    text-transform: capitalize;
-    color: #2C71B8;
-    font-family: 'Pokemon';
-    font-size: 28px;
 }
 
 .pokemon {

@@ -32,4 +32,8 @@ export default {
 .v-app-bar {
     background-color: #fff !important;
 }
+
+.container {
+    height: 100%;
+}
 </style>
