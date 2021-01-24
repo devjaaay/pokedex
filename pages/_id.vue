@@ -11,34 +11,22 @@
         {{ pokemon.name }}
       </v-card-title>
 
-      <v-card class="pokemon-characteristics" max-width="450px">
-        <v-card-text>
-          <div class="d-flex justify-space-between">
-            <div class="characteristic d-flex flex-column">
-              <span class="name">
-                <v-icon
-                  right
-                >
-                  mdi-ruler
-                </v-icon>
-                Height
-              </span>
-              <span class="value">{{ pokemon.height }}</span>
-            </div>
-            <div class="characteristic d-flex flex-column">
-              <span class="name">
-                <v-icon
-                  right
-                >
-                  mdi-weight
-                </v-icon>
-                Weight
-              </span>
-              <span class="value">{{ pokemon.weight }}</span>
-            </div>
+      <div class="pokemon-characteristics" max-width="450px">
+        <div class="d-flex flex-column">
+          <div class="characteristic d-flex flex-column">
+            <span class="name">
+              Height
+            </span>
+            <span class="value">{{ pokemon.height }}</span>
           </div>
-        </v-card-text>
-      </v-card>
+          <div class="characteristic d-flex flex-column">
+            <span class="name">
+              Weight
+            </span>
+            <span class="value">{{ pokemon.weight }}</span>
+          </div>
+        </div>
+      </div>
     </v-col>
     <v-col class="d-flex justify-center align-center">
       <v-card class="pokemon--stats">
@@ -136,12 +124,31 @@ export default {
                 flex-basis: 30%;
                 text-transform: capitalize;
                 font-size: 16px;
+                font-weight: bold;
             }
         }
     }
 
     &-characteristics {
-        width: 100%;
+        position: absolute;
+        right: 20%;
+        top: 0;
+
+        span {
+            font-family: 'Pokemon';
+            text-align: right;
+        }
+
+        .name {
+            margin: 24px 0;
+            font-size: 18px;
+            color: #2C71B8;
+        }
+
+        .value {
+            color: #eec10d;
+            font-size: 28px;
+        }
     }
 }
 </style>
