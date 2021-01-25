@@ -45,8 +45,21 @@ export const actions = {
   async getPokemon ({ dispatch, commit }, { index, isView }) {
     const { data } = await this.$axios.get(`pokemon/${index}`)
     if (isView) {
-    //   const speciesData = await dispatch('getPokemonDescription', index)
-      commit('setPokemon', data)
+      const speciesData = await dispatch('getPokemonDescription', index)
+
+      const evolutionData = await this.$axios.get(speciesData.evolution_chain.url)
+      const evolutions = []
+      let currentEvolution = evolutionData.data.chain
+
+      do {
+        evolutions.push({
+          name: currentEvolution.species.name,
+          url: currentEvolution.species.url
+        })
+
+        currentEvolution = currentEvolution.evolves_to[0]
+      } while (!!currentEvolution && currentEvolution.evolves_to)
+      commit('setPokemon', { ...data, evolutions })
     }
     return data
   },
@@ -63,6 +76,7 @@ export const actions = {
   },
   async getPokemonDescription (_, index) {
     const { data } = await this.$axios.get(`pokemon-species/${index}`)
-    return data.flavor_text_entries[0].flavor_text
+    // return data.flavor_text_entries[0].flavor_text
+    return data
   }
 }

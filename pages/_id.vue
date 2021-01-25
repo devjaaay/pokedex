@@ -54,10 +54,26 @@
         </v-card-text>
       </v-card>
     </v-col>
+
+    <div class="pokemon--evolutions">
+      <v-card>
+        <v-card-text>
+          <span class="title">Evolutions</span>
+          <EvolutionItem
+            v-for="(evolution, index) in pokemon.evolutions"
+            :key="`${index}-${pokemon.id}`"
+            :evolution="evolution"
+            :active="pokemon.name === evolution.name"
+            @click="$router.push(`/${$event}`)"
+          />
+        </v-card-text>
+      </v-card>
+    </div>
   </v-row>
 </template>
 
 <script>
+import EvolutionItem from '@/components/EvolutionItem'
 import { mapGetters } from 'vuex'
 const colors = {
   hp: '#2ecc71',
@@ -69,6 +85,9 @@ const colors = {
 }
 
 export default {
+  components: {
+    EvolutionItem
+  },
   computed: {
     ...mapGetters({
       pokemon: 'getPokemon'
@@ -148,6 +167,33 @@ export default {
         .value {
             color: #eec10d;
             font-size: 28px;
+        }
+    }
+
+    &--evolutions {
+        position: absolute;
+        top: calc(50% - 64px);
+        left: 0;
+        width: auto;
+        height: auto;
+
+        .title {
+            font-family: 'Pokemon';
+            text-align: center;
+            color: #2C71B8;
+        }
+
+        .v-card {
+            height: 100%;
+        }
+
+        .v-card__text {
+            display: flex;
+            flex-direction: column;
+
+            ::v-deep .evolution:not(:last-of-type) {
+                margin-bottom: 12px;
+            }
         }
     }
 }

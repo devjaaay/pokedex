@@ -114,7 +114,8 @@ export default {
     }
   },
   async created () {
-    this.description = await this.$store.dispatch('getPokemonDescription', this.pokemonIndex)
+    const data = await this.$store.dispatch('getPokemonDescription', this.pokemonIndex)
+    this.description = data && data.flavor_text_entries && data.flavor_text_entries[0].flavor_text
   }
 }
 </script>
