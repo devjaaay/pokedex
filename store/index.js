@@ -59,7 +59,7 @@ export const actions = {
 
         currentEvolution = currentEvolution.evolves_to[0]
       } while (!!currentEvolution && currentEvolution.evolves_to)
-      commit('setPokemon', { ...data, evolutions })
+      commit('setPokemon', { ...data, evolutions, description: speciesData.flavor_text_entries[0].flavor_text })
     }
     return data
   },

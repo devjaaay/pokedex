@@ -25,6 +25,12 @@
             </span>
             <span class="value">{{ pokemon.weight }}</span>
           </div>
+          <div class="characteristic d-flex flex-column">
+            <span class="name">
+              Types
+            </span>
+            <span class="value text-capitalize">{{ types }}</span>
+          </div>
         </div>
       </div>
     </v-col>
@@ -97,6 +103,9 @@ export default {
     },
     pokemonImage () {
       return `https://pokeres.bastionbot.org/images/pokemon/${this.id}.png`
+    },
+    types () {
+      return this.pokemon && this.pokemon.types.map(item => item.type.name).join(', ')
     },
     colors () {
       return colors
@@ -172,7 +181,7 @@ export default {
 
     &--evolutions {
         position: absolute;
-        top: calc(50% - 64px);
+        top: calc(50% - 120px);
         left: 0;
         width: auto;
         height: auto;
