@@ -35,7 +35,14 @@
       </div>
     </v-col>
     <v-col class="d-flex justify-center align-center">
-      <v-card class="pokemon--stats">
+      <Apexcharts
+        type="radar"
+        width="800px"
+        :options="stats"
+        :series="stats.series"
+      />
+
+      <!-- <v-card class="pokemon--stats">
         <v-card-title>
           <h3>Stats</h3>
         </v-card-title>
@@ -58,7 +65,7 @@
             </v-progress-linear>
           </div>
         </v-card-text>
-      </v-card>
+      </v-card> -->
     </v-col>
 
     <div class="pokemon--evolutions">
@@ -105,7 +112,23 @@ export default {
       return `https://pokeres.bastionbot.org/images/pokemon/${this.id}.png`
     },
     types () {
-      return this.pokemon && this.pokemon.types.map(item => item.type.name).join(', ')
+      return this.pokemon.types && this.pokemon.types.length && this.pokemon.types.map(item => item.type.name).join(', ')
+    },
+    stats () {
+      return {
+        stroke: {
+          show: true,
+          colors: [],
+          dashArray: 0
+        },
+        series: [
+          {
+            name: '',
+            data: Object.values(this.pokemon.stats)
+          }
+        ],
+        labels: Object.keys(this.pokemon.stats).map(item => item.toUpperCase())
+      }
     },
     colors () {
       return colors

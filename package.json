@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
+    "apexcharts": "^3.23.1",
     "core-js": "^3.8.2",
-    "nuxt": "^2.14.12"
+    "nuxt": "^2.14.12",
+    "vue-apexcharts": "^1.6.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
