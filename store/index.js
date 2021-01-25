@@ -1,9 +1,13 @@
 export const state = () => ({
   pokemons: [],
-  pokemon: {}
+  pokemon: {},
+  listLoading: false
 })
 
 export const mutations = {
+  setListLoading (state, payload) {
+    state.listLoading = payload
+  },
   setPokemons (state, payload) {
     state.pokemons = payload
   },
@@ -13,6 +17,7 @@ export const mutations = {
 }
 
 export const getters = {
+  getListLoading: state => state.listLoading,
   getPokemons: state => state.pokemons,
   getPokemon: (state) => {
     const { stats, ...rest } = state.pokemon
@@ -46,6 +51,7 @@ export const actions = {
     return data
   },
   async getPokemonList ({ dispatch, commit }, payload) {
+    commit('setListLoading', true)
     const { data } = await this.$axios.get('pokemon')
     const pokemonsDetail = await Promise.all(data.results.map((_, index) => {
       const pokemonIndex = index + 1
@@ -53,6 +59,7 @@ export const actions = {
     }))
 
     commit('setPokemons', { ...data, results: pokemonsDetail })
+    commit('setListLoading', false)
   },
   async getPokemonDescription (_, index) {
     const { data } = await this.$axios.get(`pokemon-species/${index}`)
