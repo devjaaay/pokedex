@@ -23,7 +23,7 @@
 
 ## For Improvements
 - Mobile Responsiveness
-- Test Cases
+- Unit Test
 - Pokemon Moves
 - Filter Per Types
 - Allow to catch/save pokemon
