@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
+      Pokemon Not Found
     </h1>
     <h1 v-else>
       {{ otherError }}
@@ -24,7 +24,7 @@ export default {
   data () {
     return {
       pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
+      otherError: 'An error occurred in Pokedex API'
     }
   },
   head () {
