@@ -1,12 +1,21 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col v-for="(pokemon, index) in pokemons.results" :key="index">
-      <PokemonCard :pokemon="pokemon" :pokemon-index="index + 1" />
-    </v-col>
+  <div>
+    <v-row justify="center" align="center">
+      <v-col v-for="(pokemon, index) in pokemons.results" :key="index">
+        <PokemonCard :pokemon="pokemon" :pokemon-index="index + 1" />
+      </v-col>
     <!-- <div class="catch-wrapper">
       <Catch />
     </div> -->
-  </v-row>
+    </v-row>
+    <v-row v-if="loading" class="flex-wrap">
+      <v-col v-for="(pokemon, index) in 5" :key="index">
+        <v-skeleton-loader
+          type="card-avatar, article, actions"
+        />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -22,6 +31,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      filter: 'getFilter',
       pokemons: 'getPokemons',
       loading: 'getListLoading'
     })
@@ -29,14 +39,17 @@ export default {
   async created () {
     await this.$store.dispatch('getPokemonList')
   },
-  mounted () {
-    window.document.body.onscroll = this.handleScroll
+  beforeMount () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
-    handleScroll (event) {
-      const e = event.target
+    handleScroll () {
+      const e = document.documentElement
       if (Math.ceil(e.scrollTop) + e.clientHeight >= e.scrollHeight && !this.loading) {
-        console.log('below')
+        this.$store.dispatch('getPokemonList')
       }
     }
   }
@@ -50,4 +63,5 @@ export default {
     z-index: +1;
     left: 50%;
 }
+
 </style>

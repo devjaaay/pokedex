@@ -34,14 +34,51 @@
         </div>
       </div>
     </v-col>
-    <v-col class="d-flex justify-center align-center">
+    <v-col class="d-flex justify-center align-center flex-wrap">
       <Apexcharts
         type="radar"
-        width="800px"
+        width="600"
         :options="stats"
         :series="stats.series"
       />
-
+      <v-card>
+        <v-toolbar
+          flat
+          color="primary"
+          dark
+        >
+          <v-toolbar-title>Strength & Weaknesses</v-toolbar-title>
+        </v-toolbar>
+        <v-card flat>
+          <v-card-text>
+            <v-simple-table>
+              <template #default>
+                <thead>
+                  <tr>
+                    <th />
+                    <th v-for="(value, name) in typesDamages" :key="name" class="text-left">
+                      {{ value }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in pokemon.typesDamages" :key="`${item.name}-${pokemon.name}`" class="text-left">
+                    <td class="text-capitalize">
+                      {{ item.name }}
+                    </td>
+                    <td class="text-capitalize">
+                      {{ item.data.double_damage_to }}
+                    </td>
+                    <td class="text-capitalize">
+                      {{ item.data.double_damage_from }}
+                    </td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+          </v-card-text>
+        </v-card>
+      </v-card>
       <!-- <v-card class="pokemon--stats">
         <v-card-title>
           <h3>Stats</h3>
@@ -132,8 +169,15 @@ export default {
     },
     colors () {
       return colors
+    },
+    typesDamages () {
+      return {
+        double_damage_to: 'Strong Against',
+        double_damage_from: 'Weak Against'
+      }
     }
   },
+
   async created () {
     await this.$store.dispatch('getPokemon', { index: this.id, isView: true })
   }

@@ -6,7 +6,9 @@
       flat
       elevate-on-scroll
     >
-      <img :src="require('@/assets/images/logo.svg')" height="150px" width="150px">
+      <NuxtLink to="/">
+        <img :src="require('@/assets/images/logo.svg')" height="150px" width="150px">
+      </NuxtLink>
       <v-spacer />
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
